@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>TreesHateYou — Play Trees Hate You Free Online</title>
+  <meta name="description" content="Play Trees Hate You free in your browser. A rage-comedy forest trap game where every safe-looking path hides a punchline. No download needed — start instantly." />
+  <link rel="canonical" href="https://trees-hateyou.xyz" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://trees-hateyou.xyz" />
+  <meta property="og:title" content="TreesHateYou — Play Trees Hate You Free Online" />
+  <meta property="og:description" content="A bright, trollish forest trap game where every safe-looking path can turn into the punchline one step too late. Play free in browser." />
+  <meta property="og:image" content="https://trees-hateyou.xyz/og-image.jpg" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="TreesHateYou — Play Free Online" />
+  <meta name="twitter:description" content="Rage-comedy forest trap game. Play free in browser, no download needed." />
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "VideoGame",
+    "name": "Trees Hate You",
+    "url": "https://trees-hateyou.xyz",
+    "description": "A rage-comedy trap game about surviving a forest full of fake safety, rude surprises, and joke-heavy ambushes.",
+    "genre": ["Rage Game", "Comedy", "Platformer", "Trap Game"],
+    "gamePlatform": ["Web Browser", "PC"],
+    "applicationCategory": "Game",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "5000",
+      "bestRating": "5"
+    },
+    "author": { "@type": "Person", "name": "tykenn" }
+  }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-8V3S2ZFCRW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-8V3S2ZFCRW');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            cream:       '#f3edd9',
+            'cream-dark':'#e8e0c4',
+            /* game brand green — sampled from logo */
+            brand:       '#7dc829',
+            'brand-dark':'#5a9e1a',
+            'brand-glow':'rgba(125,200,41,0.55)',
+            /* dark bg used in logo / footer */
+            'game-dark': '#0f1a06',
+            'game-mid':  '#1c2e0a',
+            forest:      '#2c5f1a',
+            'forest-pale':'#eaf4e2',
+          },
+          fontFamily: {
+            display: ['"Lilita One"', 'cursive'],
+            body:    ['"Inter"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ── base ── */
+    body { background-color: #f3edd9; font-family: 'Inter', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    /* ── brand green glow — applied to all headings & nav labels ── */
+    .brand-text {
+      color: #7dc829;
+      text-shadow:
+        0 0 12px rgba(125, 200, 41, 0.70),
+        0 0 28px rgba(125, 200, 41, 0.40),
+        0 2px  4px rgba(0,0,0,0.60);
+    }
+
+    /* lighter glow for smaller nav links */
+    .brand-nav {
+      color: #7dc829;
+      text-shadow:
+        0 0 8px rgba(125, 200, 41, 0.65),
+        0 0 18px rgba(125, 200, 41, 0.30);
+    }
+    .brand-nav:hover {
+      color: #a3e04d;
+      text-shadow:
+        0 0 12px rgba(163, 224, 77, 0.80),
+        0 0 24px rgba(163, 224, 77, 0.45);
+    }
+
+    /* ── game iframe ── */
+    .game-wrapper {
+      position: relative;
+      width: 100%;
+      padding-bottom: 60%;
+      height: 0;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+    .game-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    /* ── FAQ accordion ── */
+    .faq-answer  { display: none; }
+    .faq-item.open .faq-answer { display: block; }
+    .faq-item.open .faq-icon  { transform: rotate(45deg); }
+    .faq-icon { transition: transform 0.2s ease; display: inline-block; }
+
+    /* ── card hover ── */
+    .feature-card { transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .feature-card:hover { transform: translateY(-3px); box-shadow: 0 10px 28px rgba(0,0,0,0.10); }
+
+    /* ── header dark strip with game feel ── */
+    header { background: #111d08; border-bottom: 2px solid #3a6018; }
+
+    /* ── section number badges ── */
+    .step-badge {
+      background: rgba(125,200,41,0.15);
+      border: 1px solid rgba(125,200,41,0.4);
+      color: #7dc829;
+      text-shadow: 0 0 8px rgba(125,200,41,0.6);
+    }
+  </style>
+</head>
+
+<body class="text-gray-900">
+
+  <!-- ════════════════════════════════════════ HEADER / NAV ══ -->
+  <header class="sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
+
+      <!-- Logo — put logo.png in same folder as index.html -->
+      <a href="/" class="flex items-center gap-3 shrink-0">
+        <img
+          src="logo.png"
+          alt="Trees Hate You logo"
+          class="h-10 w-auto object-contain"
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+        />
+        <!-- Fallback if logo.png missing -->
+        <div style="display:none" class="items-center gap-2">
+          <span class="font-display text-2xl brand-text">Trees Hate You</span>
+        </div>
+        <div class="hidden sm:block">
+          <div class="brand-nav text-xs font-semibold tracking-wide">Play Trees Hate You free online</div>
+        </div>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-bold">
+        <a href="#play"        class="brand-nav transition">Play</a>
+        <a href="#about"       class="brand-nav transition">About</a>
+        <a href="#features"    class="brand-nav transition">Features</a>
+        <a href="#how-to-play" class="brand-nav transition">How to Play</a>
+        <a href="#faq"         class="brand-nav transition">FAQ</a>
+        <a href="#comments"    class="brand-nav transition">Comments</a>
+        <a href="https://tykenn.itch.io/trees-hate-you" target="_blank"
+           class="border-2 border-brand text-brand brand-nav font-bold px-4 py-1.5 rounded-full hover:bg-brand hover:text-game-dark transition text-xs">
+          itch.io ↗
+        </a>
+      </nav>
+
+      <!-- Mobile hamburger -->
+      <button onclick="toggleMenu()" class="md:hidden p-2 rounded-lg" aria-label="Menu">
+        <svg class="w-6 h-6 text-brand" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile nav dropdown -->
+    <div id="mobile-menu" class="hidden md:hidden bg-game-dark border-t border-green-900 px-4 pb-4">
+      <div class="flex flex-col gap-4 pt-4 text-sm font-bold">
+        <a href="#play"        onclick="toggleMenu()" class="brand-nav">▶ Play</a>
+        <a href="#about"       onclick="toggleMenu()" class="brand-nav">About</a>
+        <a href="#features"    onclick="toggleMenu()" class="brand-nav">Features</a>
+        <a href="#how-to-play" onclick="toggleMenu()" class="brand-nav">How to Play</a>
+        <a href="#faq"         onclick="toggleMenu()" class="brand-nav">FAQ</a>
+        <a href="#comments"    onclick="toggleMenu()" class="brand-nav">Comments</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ════════════════════════════════════════════ HERO ══ -->
+  <section class="max-w-6xl mx-auto px-4 pt-12 pb-8">
+    <div class="grid md:grid-cols-2 gap-8 items-center">
+
+      <!-- Left -->
+      <div>
+        <h1 class="font-display text-5xl md:text-6xl leading-tight mb-5 brand-text">
+          TREES HATE YOU FREE ONLINE
+        </h1>
+        <p class="text-lg text-gray-600 leading-relaxed mb-8">
+          A bright, trollish forest trap game where every safe-looking path can turn into the punchline one step too late.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a href="#play"
+             class="bg-brand text-game-dark font-display text-lg px-8 py-3.5 rounded-full hover:bg-brand-dark hover:text-white transition shadow-lg"
+             style="box-shadow: 0 0 20px rgba(125,200,41,0.45)">
+            ▶ Play the Demo
+          </a>
+          <a href="https://store.steampowered.com/app/4171850/Trees_Hate_You/" target="_blank"
+             class="border-2 border-brand brand-nav font-bold px-6 py-3 rounded-full text-base hover:bg-brand/10 transition">
+            View on Steam
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: YouTube trailer — click to open on YouTube -->
+      <a href="https://www.youtube.com/watch?v=Lea_yP4Rr2Y" target="_blank" rel="noopener"
+         class="block relative rounded-2xl overflow-hidden shadow-2xl border-2 border-brand/40 group"
+         style="box-shadow: 0 0 32px rgba(125,200,41,0.20)">
+        <!-- Thumbnail from YouTube CDN -->
+        <img
+          src="https://img.youtube.com/vi/Lea_yP4Rr2Y/maxresdefault.jpg"
+          alt="Trees Hate You — Announce Trailer"
+          class="w-full object-cover"
+          style="aspect-ratio:16/9"
+          onerror="this.src='https://img.youtube.com/vi/Lea_yP4Rr2Y/hqdefault.jpg'"
+        />
+        <!-- Play button overlay -->
+        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center"
+               style="background:rgba(125,200,41,0.90);box-shadow:0 0 24px rgba(125,200,41,0.7)">
+            <svg class="w-7 h-7 text-black ml-1" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+        </div>
+        <!-- Label -->
+        <div class="absolute bottom-3 left-3 text-xs font-semibold text-white bg-black/50 px-2 py-1 rounded-lg">
+          ▶ Watch Announce Trailer on YouTube
+        </div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════ PLAYER SCORE ══ -->
+  <section class="max-w-6xl mx-auto px-4 mb-6">
+    <div class="bg-game-dark rounded-2xl px-6 py-4 flex flex-wrap items-center gap-4 border border-green-900"
+         style="box-shadow: 0 0 24px rgba(125,200,41,0.10)">
+      <span class="text-xs font-bold text-gray-500 uppercase tracking-widest">Player Score</span>
+      <span class="text-yellow-400 text-2xl leading-none">★★★★★</span>
+      <span class="font-display text-2xl brand-text">4.8 / 5</span>
+      <span class="text-gray-500 text-sm">Based on 5000+ player ratings</span>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════ GAME IFRAME ══ -->
+  <section id="play" class="max-w-6xl mx-auto px-4 mb-12">
+    <div class="bg-game-dark rounded-2xl p-2 border border-green-900"
+         style="box-shadow: 0 0 40px rgba(125,200,41,0.15)">
+      <div class="game-wrapper">
+        <iframe
+          src="https://html-classic.itch.zone/html/14007573-1629712/index.html"
+          allowfullscreen
+          allow="autoplay; fullscreen *; pointer-lock *"
+          title="Play Trees Hate You Online Free — treeshateyou">
+        </iframe>
+      </div>
+    </div>
+    <p class="text-center text-sm text-gray-400 mt-3">
+      Click the game to focus · WASD or Arrow Keys to move · R to retry
+    </p>
+  </section>
+
+
+  <!-- ══════════════════════════════ ABOUT + COMMENTS ══ -->
+  <section class="max-w-6xl mx-auto px-4 mb-12">
+    <div class="grid md:grid-cols-[3fr_2fr] gap-8">
+
+      <!-- About -->
+      <div id="about">
+        <h2 class="font-display text-4xl mb-3 brand-text">About Trees Hate You</h2>
+        <p class="text-gray-500 font-semibold mb-5 text-base">
+          A trap-heavy forest comedy where the whole level seems built to bait you into one bad decision after another.
+        </p>
+        <div class="space-y-4 text-gray-700 leading-relaxed">
+          <p>Trees Hate You takes a simple walk through the woods and turns it into a joke at the player's expense. The path looks readable, the colors look friendly, and the setup feels fair right up until the game proves that the forest has been lying to you the whole time.</p>
+          <p>What makes it work is not just difficulty. Trees Hate You is funny because the traps are staged like punchlines. A sign points the wrong way, a quiet path suddenly becomes dangerous, and the reset comes fast enough that the joke lands before the frustration takes over.</p>
+          <p>If you like short retry loops, readable hazards, and games that troll you on purpose, Trees Hate You has the exact kind of nasty charm that keeps players hitting replay even after a brutal fail.</p>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div id="comments">
+        <h2 class="font-display text-4xl mb-4 brand-text">
+          Comments <span class="text-gray-400 font-sans font-normal text-2xl" style="text-shadow:none">(371)</span>
+        </h2>
+
+        <div class="bg-white rounded-2xl p-4 shadow-sm mb-4 border border-gray-100">
+          <textarea id="comment-text" maxlength="140" rows="3"
+            placeholder="Share your funniest fail, toughest trap, or first impression..."
+            class="w-full text-sm border border-gray-200 rounded-xl p-3 resize-none focus:outline-none focus:border-brand transition"
+            oninput="updateCharCount(this)">
+          </textarea>
+          <div class="text-right text-xs text-gray-400 mb-3" id="char-count">0/140</div>
+          <div class="grid grid-cols-2 gap-2 mb-3">
+            <input type="text"  placeholder="Name"  class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand" />
+            <input type="email" placeholder="Email" class="border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-brand" />
+          </div>
+          <button onclick="postComment()"
+            class="w-full bg-brand text-game-dark font-display py-2.5 rounded-xl text-sm hover:bg-brand-dark hover:text-white transition">
+            Post Comment
+          </button>
+        </div>
+
+        <!-- Static comments -->
+        <div class="space-y-3" id="comment-list">
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-xs font-bold brand-nav shrink-0">A</div>
+            <div>
+              <div class="flex items-center gap-2"><span class="text-sm font-semibold">aly</span><span class="text-xs text-gray-400">6 hours ago</span></div>
+              <p class="text-sm text-gray-600">no cuz literally... What are these comments</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-xs font-bold brand-nav shrink-0">m</div>
+            <div>
+              <div class="flex items-center gap-2"><span class="text-sm font-semibold">mirus</span><span class="text-xs text-gray-400">3 weeks ago</span></div>
+              <p class="text-sm text-gray-600">The witch trees. Truly captivating</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-xs font-bold brand-nav shrink-0">R</div>
+            <div>
+              <div class="flex items-center gap-2"><span class="text-sm font-semibold">Rachel</span><span class="text-xs text-gray-400">4 weeks ago</span></div>
+              <p class="text-sm text-gray-600">Playing Trees Hate You was honestly a rollercoaster</p>
+            </div>
+          </div>
+          <div class="flex gap-3 items-start">
+            <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-xs font-bold brand-nav shrink-0">a</div>
+            <div>
+              <div class="flex items-center gap-2"><span class="text-sm font-semibold">adam</span><span class="text-xs text-gray-400">3 weeks ago</span></div>
+              <p class="text-sm text-gray-600">You need to be wary of the trees</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════ FEATURES ══ -->
+  <section id="features" class="max-w-6xl mx-auto px-4 mb-12">
+    <h2 class="font-display text-4xl mb-2 brand-text">Features</h2>
+    <p class="text-gray-500 mb-6">The part that makes Trees Hate You stick is how clearly it sells the setup before it ruins your confidence.</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="text-3xl mb-3">🪤</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.1rem">Trap-first level design</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Safe-looking routes, fake guidance, and sudden forest ambushes turn normal movement into the core joke of every run.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="text-3xl mb-3">⚡</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.1rem">Fast retries</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Deaths happen quickly, but so do restarts, so the game keeps its momentum and stays funny instead of dragging.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="text-3xl mb-3">👁️</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.1rem">Readable chaos</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">The art is clear enough that you usually understand exactly what trick was played on you, making every fail easier to laugh at.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="text-3xl mb-3">🎮</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.1rem">Demo you can jump into now</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">The current public version is easy to try in browser — test the game's mood before committing to a deeper run.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════ HOW TO PLAY ══ -->
+  <section id="how-to-play" class="max-w-6xl mx-auto px-4 mb-12">
+    <h2 class="font-display text-4xl mb-2 brand-text">How to Play</h2>
+    <p class="text-gray-500 mb-6">The basic goal is simple. The hard part is accepting that the forest is always trying to embarrass you.</p>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="w-10 h-10 rounded-full step-badge flex items-center justify-center font-display text-lg mb-4">01</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.05rem">Start the demo</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Use the embedded browser version above, or open the official itch.io page to launch the demo directly.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="w-10 h-10 rounded-full step-badge flex items-center justify-center font-display text-lg mb-4">02</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.05rem">Treat every path with suspicion</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Harmless-looking routes are dangerous — don't trust signs, empty space, or convenient shortcuts too quickly.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="w-10 h-10 rounded-full step-badge flex items-center justify-center font-display text-lg mb-4">03</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.05rem">Read the setup before you move</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Most traps look fair for a second. Slow down to notice patterns, timing, and the joke the game is preparing.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="w-10 h-10 rounded-full step-badge flex items-center justify-center font-display text-lg mb-4">04</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.05rem">Retry immediately</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">The game feels best with momentum. A bad death teaches you something — another run is fun, not a punishment.</p>
+      </div>
+    </div>
+
+    <!-- Controls table -->
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+      <h3 class="font-display text-2xl mb-4 brand-text">Controls</h3>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-100">
+              <th class="text-left py-2 pr-8 font-semibold text-gray-400">Action</th>
+              <th class="text-left py-2 pr-8 font-semibold text-gray-400">PC / Keyboard</th>
+              <th class="text-left py-2 font-semibold text-gray-400">Mobile / Tablet</th>
+            </tr>
+          </thead>
+          <tbody class="text-gray-700 divide-y divide-gray-50">
+            <tr>
+              <td class="py-2.5 pr-8">Move Left / Right</td>
+              <td class="py-2.5 pr-8"><kbd class="bg-gray-100 px-2 py-0.5 rounded text-xs">A</kbd> / <kbd class="bg-gray-100 px-2 py-0.5 rounded text-xs">D</kbd> or Arrow Keys</td>
+              <td class="py-2.5">On-screen joystick</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 pr-8">Jump</td>
+              <td class="py-2.5 pr-8"><kbd class="bg-gray-100 px-2 py-0.5 rounded text-xs">Space</kbd> or <kbd class="bg-gray-100 px-2 py-0.5 rounded text-xs">W</kbd></td>
+              <td class="py-2.5">Up arrow icon</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 pr-8">Retry / Reset</td>
+              <td class="py-2.5 pr-8"><kbd class="bg-gray-100 px-2 py-0.5 rounded text-xs">R</kbd></td>
+              <td class="py-2.5">Restart button</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ WHY PLAYERS LOVE ══ -->
+  <section class="max-w-6xl mx-auto px-4 mb-12">
+    <h2 class="font-display text-4xl mb-2 brand-text">Why Players Love Trees Hate You</h2>
+    <p class="text-gray-500 mb-6">The appeal is not just that the game is mean. It is that the meanness is staged with a sense of humor.</p>
+    <div class="grid sm:grid-cols-3 gap-4">
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="text-3xl mb-3">😂</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.05rem">It is funny before it is frustrating</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">The best deaths feel like a prank with perfect timing — even failed runs feel worth talking about.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="text-3xl mb-3">⏱️</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.05rem">It fits short sessions</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">Easy to load, easy to understand, and ruthless enough that one quick run often turns into several more.</p>
+      </div>
+      <div class="feature-card bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <div class="text-3xl mb-3">📱</div>
+        <h3 class="font-display text-lg mb-2 brand-text" style="font-size:1.05rem">It is great for clips and streams</h3>
+        <p class="text-sm text-gray-600 leading-relaxed">The setup is readable, the surprise is instant, and the reaction hits fast — great for both players and viewers.</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ══════════════════════ QUICK FACTS + LINKS ══ -->
+  <section class="max-w-6xl mx-auto px-4 mb-12">
+    <div class="grid md:grid-cols-2 gap-6">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <h2 class="font-display text-2xl mb-4 brand-text">Quick Facts</h2>
+        <ul class="space-y-2.5 text-sm text-gray-700">
+          <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Browser demo available now on itch.io</li>
+          <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Windows build listed on itch.io</li>
+          <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Steam release window: 2026</li>
+          <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No exact release date announced publicly</li>
+          <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No public full-game price listed yet</li>
+          <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No public console or mobile version confirmed</li>
+        </ul>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
+        <h2 class="font-display text-2xl mb-4 brand-text">Official Links</h2>
+        <div class="space-y-3">
+          <a href="https://tykenn.itch.io/trees-hate-you" target="_blank" rel="noopener"
+             class="flex items-center gap-3 text-sm hover:opacity-80 transition group">
+            <span class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center text-xl border border-brand/20">🎮</span>
+            <div>
+              <div class="font-semibold brand-nav">Play on itch.io</div>
+              <div class="text-xs text-gray-400">Official page — free demo</div>
+            </div>
+          </a>
+          <a href="https://store.steampowered.com/app/4171850/Trees_Hate_You/" target="_blank" rel="noopener"
+             class="flex items-center gap-3 text-sm hover:opacity-80 transition group">
+            <span class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center text-xl border border-brand/20">🖥️</span>
+            <div>
+              <div class="font-semibold brand-nav">View on Steam</div>
+              <div class="text-xs text-gray-400">Wishlist for 2026 full release</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ════════════════════════════════════════ FAQ ══ -->
+  <section id="faq" class="max-w-6xl mx-auto px-4 mb-16">
+    <h2 class="font-display text-4xl mb-2 brand-text">FAQ of Trees Hate You</h2>
+    <p class="text-gray-500 mb-6">Short answers for the platform, release, mobile, demo, and console questions players are actually asking.</p>
+    <div class="space-y-3" id="faq-list"></div>
+  </section>
+
+
+  <!-- ════════════════════════════════════ FOOTER ══ -->
+  <footer class="bg-game-dark border-t-2 border-green-900">
+    <div class="max-w-6xl mx-auto px-4 py-12">
+      <div class="flex flex-col md:flex-row justify-between gap-8">
+
+        <!-- Brand -->
+        <div class="max-w-xs">
+          <div class="flex items-center gap-2 mb-3">
+            <img src="logo.png" alt="Trees Hate You" class="h-8 w-auto"
+                 onerror="this.style.display='none'" />
+            <span class="font-display text-xl brand-text">Trees Hate You</span>
+          </div>
+          <p class="text-sm text-gray-500 leading-relaxed mb-4">
+            Play Trees Hate You free online and keep up with the chaos.
+          </p>
+          <p class="text-xs text-gray-600">
+            Unofficial fan site. Not affiliated with Tykenn or the official Trees Hate You team.
+          </p>
+        </div>
+
+        <!-- Footer links -->
+        <div class="grid grid-cols-2 gap-8 text-sm">
+          <div>
+            <div class="font-display brand-nav text-xs mb-3 uppercase tracking-wider">Site</div>
+            <div class="space-y-2 text-gray-500">
+              <a href="#about"       class="block hover:text-brand transition">About</a>
+              <a href="#features"    class="block hover:text-brand transition">Features</a>
+              <a href="#how-to-play" class="block hover:text-brand transition">How to Play</a>
+              <a href="#faq"         class="block hover:text-brand transition">FAQ</a>
+              <a href="#comments"    class="block hover:text-brand transition">Comments</a>
+            </div>
+          </div>
+          <div>
+            <div class="font-display brand-nav text-xs mb-3 uppercase tracking-wider">Official</div>
+            <div class="space-y-2 text-gray-500">
+              <a href="https://tykenn.itch.io/trees-hate-you" target="_blank" rel="noopener" class="block hover:text-brand transition">itch.io ↗</a>
+              <a href="https://store.steampowered.com/app/4171850/" target="_blank" rel="noopener" class="block hover:text-brand transition">Steam ↗</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="border-t border-white/5 mt-8 pt-6 text-xs text-gray-600 text-center">
+        © 2026 trees-hateyou.xyz — Unofficial fan site
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ════════════════════════════════════ SCRIPTS ══ -->
+  <script>
+    function toggleMenu() {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    }
+
+    function updateCharCount(el) {
+      document.getElementById('char-count').textContent = el.value.length + '/140';
+    }
+
+    function postComment() {
+      const text = document.getElementById('comment-text').value.trim();
+      if (!text) return;
+      const list = document.getElementById('comment-list');
+      const div = document.createElement('div');
+      div.className = 'flex gap-3 items-start';
+      div.innerHTML = `
+        <div class="w-8 h-8 rounded-full bg-brand/20 flex items-center justify-center text-xs font-bold shrink-0" style="color:#7dc829">Y</div>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-sm font-semibold">You</span>
+            <span class="text-xs text-gray-400">just now</span>
+          </div>
+          <p class="text-sm text-gray-600">${text.replace(/</g,'&lt;')}</p>
+        </div>`;
+      list.prepend(div);
+      document.getElementById('comment-text').value = '';
+      document.getElementById('char-count').textContent = '0/140';
+    }
+
+    /* FAQ */
+    const faqs = [
+      { q:"What is Trees Hate You?", a:"Trees Hate You is a rage-comedy trap game about surviving a forest full of fake safety, rude surprises, and joke-heavy ambushes. It is built around short retries, readable hazards, and traps that turn ordinary movement into the punchline." },
+      { q:"Can I play Trees Hate You free online?", a:"Yes. The demo is playable for free right here in your browser at trees-hateyou.xyz. No download, no account required — just scroll up, click the game and it loads instantly." },
+      { q:"Is Trees Hate You on PC?", a:"Yes. A Windows build is available to download on itch.io. The browser version also works on PC and Mac in most modern browsers without any installation." },
+      { q:"What is the Trees Hate You price?", a:"The current browser demo is completely free. No full-game price for the Steam release has been announced publicly yet." },
+      { q:"What is the Trees Hate You release date?", a:"The full game has a 2026 Steam release window. No exact calendar date has been publicly announced as of now." },
+      { q:"Is Trees Hate You on mobile?", a:"There is no official mobile version confirmed at this time. The browser demo may work on some mobile browsers, but it is optimized for desktop play." },
+      { q:"What platforms is Trees Hate You on?", a:"Currently available in browser via itch.io and as a Windows download. A full Steam release is planned for 2026. No console or mobile version has been confirmed." },
+      { q:"Is there a Trees Hate You demo?", a:"Yes. The public demo is playable directly in your browser right here on this page, or on the official itch.io page." },
+      { q:"Is Trees Hate You coming to PS5 or Switch?", a:"No console release has been publicly confirmed. Only browser and PC versions are currently available." },
+      { q:"Is Trees Hate You on Android?", a:"No official Android version exists. The browser demo may partially work in Android Chrome, but performance is not guaranteed." }
+    ];
+
+    const faqList = document.getElementById('faq-list');
+    faqs.forEach((item, i) => {
+      const div = document.createElement('div');
+      div.className = 'faq-item bg-white rounded-2xl shadow-sm overflow-hidden border border-gray-100';
+      div.innerHTML = `
+        <button onclick="toggleFaq(${i})"
+          class="w-full flex justify-between items-center px-6 py-4 text-left font-semibold text-gray-800 hover:bg-cream transition">
+          <span>${item.q}</span>
+          <span class="faq-icon text-2xl ml-4 shrink-0" style="color:#7dc829;text-shadow:0 0 8px rgba(125,200,41,0.6)">+</span>
+        </button>
+        <div class="faq-answer px-6 pb-4 text-sm text-gray-600 leading-relaxed">${item.a}</div>`;
+      faqList.appendChild(div);
+    });
+
+    function toggleFaq(i) {
+      document.querySelectorAll('.faq-item')[i].classList.toggle('open');
+    }
+  </script>
+
+</body>
+</html>
