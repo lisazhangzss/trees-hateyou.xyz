@@ -14,7 +14,8 @@
   <meta property="og:url" content="https://trees-hateyou.xyz" />
   <meta property="og:title" content="TreesHateYou — Play Trees Hate You Free Online" />
   <meta property="og:description" content="A bright, trollish forest trap game where every safe-looking path can turn into the punchline one step too late. Play free in browser." />
-  <meta property="og:image" content="https://trees-hateyou.xyz/og-image.jpg" />
+  <meta property="og:image" content="https://trees-hateyou.xyz/cover-thumb.jpg" />
+  <meta name="twitter:image" content="https://trees-hateyou.xyz/cover-thumb.jpg" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -152,6 +153,11 @@
       color: #7dc829;
       text-shadow: 0 0 8px rgba(125,200,41,0.6);
     }
+
+    /* ── loading spinner ── */
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
   </style>
 </head>
 
@@ -186,10 +192,6 @@
         <a href="#how-to-play" class="brand-nav transition">How to Play</a>
         <a href="#faq"         class="brand-nav transition">FAQ</a>
         <a href="#comments"    class="brand-nav transition">Comments</a>
-        <a href="https://tykenn.itch.io/trees-hate-you" target="_blank"
-           class="border-2 border-brand text-brand brand-nav font-bold px-4 py-1.5 rounded-full hover:bg-brand hover:text-game-dark transition text-xs">
-          itch.io ↗
-        </a>
       </nav>
 
       <!-- Mobile hamburger -->
@@ -214,6 +216,11 @@
   </header>
 
 
+  <!-- Mobile tip (non-blocking) -->
+  <div id="mobile-tip" style="display:none;background:#3a6018;color:#d4f0a0;text-align:center;padding:9px 16px;font-size:.85rem;font-weight:600;">
+    📱 Mobile tip: This game plays best on desktop with a keyboard. Touch controls are available but limited.
+  </div>
+
   <!-- ════════════════════════════════════════════ HERO ══ -->
   <section class="max-w-6xl mx-auto px-4 pt-12 pb-8">
     <div class="grid md:grid-cols-2 gap-8 items-center">
@@ -232,46 +239,24 @@
              style="box-shadow: 0 0 20px rgba(125,200,41,0.45)">
             ▶ Play the Demo
           </a>
-          <a href="https://store.steampowered.com/app/4171850/Trees_Hate_You/" target="_blank"
-             class="border-2 border-brand brand-nav font-bold px-6 py-3 rounded-full text-base hover:bg-brand/10 transition">
-            View on Steam
-          </a>
         </div>
       </div>
 
-      <!-- Right: YouTube trailer — click to watch on YouTube -->
-      <a href="https://www.youtube.com/watch?v=Lea_yP4Rr2Y" target="_blank" rel="noopener"
-         class="block relative rounded-2xl overflow-hidden shadow-2xl border-2 border-brand/40 group"
-         style="box-shadow:0 0 32px rgba(125,200,41,0.20);aspect-ratio:16/9">
-        <!-- Thumbnail -->
-        <img
-          src="https://img.youtube.com/vi/Lea_yP4Rr2Y/maxresdefault.jpg"
-          alt="Trees Hate You — Announce Trailer by Tykenn Game Lab"
-          class="w-full h-full object-cover"
-          onerror="this.src='https://img.youtube.com/vi/Lea_yP4Rr2Y/hqdefault.jpg'"
-        />
-        <!-- Hover dim -->
-        <div class="absolute inset-0 bg-black/20 group-hover:bg-black/5 transition"></div>
-        <!-- Play button -->
-        <div class="absolute inset-0 flex items-center justify-center">
-          <div class="w-16 h-16 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform"
-               style="background:rgba(255,0,0,0.88);box-shadow:0 0 28px rgba(255,0,0,0.5)">
-            <svg class="w-7 h-7 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </div>
-        </div>
-        <!-- Title bar -->
-        <div class="absolute top-0 left-0 right-0 px-3 py-2 flex items-center gap-2"
-             style="background:linear-gradient(to bottom,rgba(0,0,0,0.7),transparent)">
-          <span class="text-white text-xs font-semibold">Trees Hate You — Announce Trailer</span>
-        </div>
-        <!-- YouTube label -->
-        <div class="absolute bottom-2 right-3 flex items-center gap-1">
-          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="#fff"><path d="M23.5 6.2s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C17.3 2.7 12 2.7 12 2.7s-5.3 0-8.3.2c-.4.1-1.4.1-2.3 1-.7.7-.9 2.3-.9 2.3S.3 8 .3 9.8v1.7c0 1.8.2 3.6.2 3.6s.2 1.6.9 2.3c.9.9 2 .9 2.6 1 1.9.2 7.9.2 7.9.2s5.3 0 8.3-.2c.4-.1 1.4-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.8.2-3.6V9.8c0-1.8-.2-3.6-.2-3.6zM9.7 14.8V8.5l6.3 3.2-6.3 3.1z"/></svg>
-          <span class="text-white text-xs font-semibold">YouTube</span>
-        </div>
-      </a>
+      <!-- Right: game cover image -->
+      <div class="relative rounded-2xl overflow-hidden shadow-2xl border-2 border-brand/40"
+           style="box-shadow:0 0 32px rgba(125,200,41,0.20);aspect-ratio:16/9">
+        <img src="./cover-thumb.jpg"
+             alt="Trees Hate You – gameplay screenshot"
+             class="w-full h-full object-cover"
+             loading="eager" fetchpriority="high"
+             width="800" height="450">
+        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(15,26,6,0.55) 0%,transparent 50%)"></div>
+        <a href="#play"
+           class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 font-display text-base px-6 py-2.5 rounded-full text-game-dark transition"
+           style="background:#7dc829;box-shadow:0 0 20px rgba(125,200,41,0.55);white-space:nowrap">
+          ▶ Play Free Now
+        </a>
+      </div>
     </div>
   </section>
 
@@ -300,7 +285,7 @@
              style="z-index:10">
           <!-- Blurred background -->
           <div class="absolute inset-0 bg-cover bg-center"
-               style="background-image:url('https://img.youtube.com/vi/Lea_yP4Rr2Y/maxresdefault.jpg');filter:blur(6px) brightness(0.45);transform:scale(1.05)">
+               style="background-image:url('./cover-thumb.jpg');filter:blur(6px) brightness(0.45);transform:scale(1.05)">
           </div>
           <!-- Card -->
           <div class="relative z-10 flex flex-col items-center gap-3 px-6 py-8 rounded-2xl text-center"
@@ -327,6 +312,14 @@
           </div>
         </div>
 
+        <!-- ── Loading state ── -->
+        <div id="game-loading" style="display:none;position:absolute;inset:0;background:#0f1a06;border-radius:10px;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:20px;z-index:5;">
+          <div id="game-spinner" style="width:46px;height:46px;border:4px solid rgba(125,200,41,0.2);border-top-color:#7dc829;border-radius:50%;animation:spin 1s linear infinite;"></div>
+          <div style="color:#7dc829;font-family:'Lilita One',cursive;font-size:1.1rem;">Loading Game…</div>
+          <div style="color:rgba(255,255,255,.55);font-size:.84rem;line-height:1.6;max-width:300px;">Usually loads in <strong style="color:#fff;">5–20 seconds</strong>.</div>
+          <div id="load-timer" style="color:rgba(125,200,41,.5);font-size:.78rem;">0s elapsed</div>
+        </div>
+
         <!-- ── Actual iframe (loaded on click) ── -->
         <iframe id="game-frame"
           src=""
@@ -338,10 +331,26 @@
           style="display:none">
         </iframe>
 
+        <!-- ── Overlay controls (fullscreen + close) ── -->
+        <div id="game-controls" style="display:none;position:absolute;bottom:10px;right:10px;z-index:9999;gap:8px;align-items:center;">
+          <button id="game-fullscreen-btn"
+            ontouchstart="toggleFullscreen();event.stopPropagation();"
+            onclick="toggleFullscreen();event.stopPropagation();"
+            style="background:rgba(0,0,0,.65);backdrop-filter:blur(6px);border:1px solid rgba(125,200,41,.4);color:#7dc829;padding:8px 14px;border-radius:20px;font-size:.8rem;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" id="fs-icon"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+            <span id="fs-label">Fullscreen</span>
+          </button>
+          <button id="game-close-btn"
+            ontouchstart="closeGame();event.stopPropagation();"
+            onclick="closeGame();event.stopPropagation();"
+            style="background:rgba(0,0,0,.65);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);color:#fff;padding:8px 14px;border-radius:20px;font-size:.8rem;font-weight:600;cursor:pointer;font-family:inherit;-webkit-tap-highlight-color:transparent;touch-action:manipulation;">
+            ✕ Close
+          </button>
+        </div>
+
       </div>
     </div>
 
-    <!-- Loading tip -->
     <p class="text-center text-sm text-gray-400 mt-3" id="game-tip">
       ▶ Click <strong class="text-brand">Play Now</strong> above to start · WASD or Arrow Keys to move · R to retry
     </p>
@@ -541,41 +550,18 @@
   </section>
 
 
-  <!-- ══════════════════════ QUICK FACTS + LINKS ══ -->
+  <!-- ══════════════════════ QUICK FACTS ══ -->
   <section class="max-w-6xl mx-auto px-4 mb-12">
-    <div class="grid md:grid-cols-2 gap-6">
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <h2 class="font-display text-2xl mb-4 brand-text">Quick Facts</h2>
-        <ul class="space-y-2.5 text-sm text-gray-700">
-          <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Browser demo available now on itch.io</li>
-          <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Windows build listed on itch.io</li>
-          <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Steam release window: 2026</li>
-          <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No exact release date announced publicly</li>
-          <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No public full-game price listed yet</li>
-          <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No public console or mobile version confirmed</li>
-        </ul>
-      </div>
-      <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-        <h2 class="font-display text-2xl mb-4 brand-text">Official Links</h2>
-        <div class="space-y-3">
-          <a href="https://tykenn.itch.io/trees-hate-you" target="_blank" rel="noopener"
-             class="flex items-center gap-3 text-sm hover:opacity-80 transition group">
-            <span class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center text-xl border border-brand/20">🎮</span>
-            <div>
-              <div class="font-semibold brand-nav">Play on itch.io</div>
-              <div class="text-xs text-gray-400">Official page — free demo</div>
-            </div>
-          </a>
-          <a href="https://store.steampowered.com/app/4171850/Trees_Hate_You/" target="_blank" rel="noopener"
-             class="flex items-center gap-3 text-sm hover:opacity-80 transition group">
-            <span class="w-10 h-10 bg-brand/10 rounded-xl flex items-center justify-center text-xl border border-brand/20">🖥️</span>
-            <div>
-              <div class="font-semibold brand-nav">View on Steam</div>
-              <div class="text-xs text-gray-400">Wishlist for 2026 full release</div>
-            </div>
-          </a>
-        </div>
-      </div>
+    <div class="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 max-w-xl">
+      <h2 class="font-display text-2xl mb-4 brand-text">Quick Facts</h2>
+      <ul class="space-y-2.5 text-sm text-gray-700">
+        <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Browser demo available — play free right here</li>
+        <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Windows build available for download</li>
+        <li class="flex gap-2 items-start"><span class="text-brand font-bold mt-0.5">✓</span> Steam release window: 2026</li>
+        <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No exact release date announced publicly</li>
+        <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No public full-game price listed yet</li>
+        <li class="flex gap-2 items-start"><span class="text-gray-300 mt-0.5">—</span> No public console or mobile version confirmed</li>
+      </ul>
     </div>
   </section>
 
@@ -609,7 +595,7 @@
         </div>
 
         <!-- Footer links -->
-        <div class="grid grid-cols-2 gap-8 text-sm">
+        <div class="grid grid-cols-1 gap-8 text-sm">
           <div>
             <div class="font-display brand-nav text-xs mb-3 uppercase tracking-wider">Site</div>
             <div class="space-y-2 text-gray-500">
@@ -618,13 +604,6 @@
               <a href="#how-to-play" class="block hover:text-brand transition">How to Play</a>
               <a href="#faq"         class="block hover:text-brand transition">FAQ</a>
               <a href="#comments"    class="block hover:text-brand transition">Comments</a>
-            </div>
-          </div>
-          <div>
-            <div class="font-display brand-nav text-xs mb-3 uppercase tracking-wider">Official</div>
-            <div class="space-y-2 text-gray-500">
-              <a href="https://tykenn.itch.io/trees-hate-you" target="_blank" rel="noopener" class="block hover:text-brand transition">itch.io ↗</a>
-              <a href="https://store.steampowered.com/app/4171850/" target="_blank" rel="noopener" class="block hover:text-brand transition">Steam ↗</a>
             </div>
           </div>
         </div>
@@ -639,17 +618,159 @@
 
   <!-- ════════════════════════════════════ SCRIPTS ══ -->
   <script>
+    /* ── Mobile detection ── */
+    function isMobile() {
+      return /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent) || window.innerWidth < 768;
+    }
+    window.addEventListener('DOMContentLoaded', function() {
+      if (isMobile()) {
+        var tip = document.getElementById('mobile-tip');
+        if (tip) tip.style.display = 'block';
+      }
+    });
+
+    /* ── Loading timer state ── */
+    var loadTimerInterval = null;
+    var loadStartTime = 0;
+
+    /* ── Game controls visibility ── */
+    function showGameControls() {
+      var controls = document.getElementById('game-controls');
+      if (controls) { controls.style.display = 'flex'; }
+    }
+
+    /* ── Start game ── */
     function startGame() {
-      const overlay = document.getElementById('game-overlay');
-      const frame   = document.getElementById('game-frame');
-      const tip     = document.getElementById('game-tip');
-      // 加载 iframe
+      var overlay  = document.getElementById('game-overlay');
+      var frame    = document.getElementById('game-frame');
+      var loading  = document.getElementById('game-loading');
+      var timerEl  = document.getElementById('load-timer');
+      var tip      = document.getElementById('game-tip');
+
+      // Hide overlay, show loading
+      overlay.style.display = 'none';
+      loading.style.display = 'flex';
+
+      // Load iframe
       frame.src = frame.dataset.src;
       frame.style.display = 'block';
-      overlay.style.display = 'none';
-      // 更新提示语
-      tip.innerHTML = 'This game may load slowly. Please wait a moment. · WASD or Arrow Keys to move · R to retry';
+
+      // Update tip text
+      tip.innerHTML = 'Game is loading… · WASD or Arrow Keys to move · R to retry';
+
+      // Start elapsed timer; auto-hide loading after 60s
+      loadStartTime = Date.now();
+      clearInterval(loadTimerInterval);
+      loadTimerInterval = setInterval(function() {
+        var elapsed = Math.floor((Date.now() - loadStartTime) / 1000);
+        if (timerEl) timerEl.textContent = elapsed + 's elapsed';
+        if (elapsed >= 60) {
+          clearInterval(loadTimerInterval);
+          loading.style.display = 'none';
+          showGameControls();
+        }
+      }, 1000);
+
+      // Hide loading when iframe finishes (cross-origin may not always fire, timer is fallback)
+      frame.onload = function() {
+        clearInterval(loadTimerInterval);
+        loading.style.display = 'none';
+        showGameControls();
+      };
     }
+
+    /* ── Close game ── */
+    function closeGame() {
+      // If in iOS fake fullscreen, exit it first
+      if (isIosFakeFS) {
+        var wrapper = document.querySelector('.game-wrapper');
+        wrapper.style.cssText = wrapper.style.cssText
+          .replace(/position\s*:\s*fixed\s*;?/gi, '')
+          .replace(/inset\s*:\s*0\s*;?/gi, '')
+          .replace(/z-index\s*:\s*99999\s*;?/gi, '')
+          .replace(/border-radius\s*:\s*0\s*;?/gi, '');
+        document.body.style.overflow = '';
+        isIosFakeFS = false;
+      } else if (document.fullscreenElement || document.webkitFullscreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+      }
+
+      // Reset iframe
+      var frame   = document.getElementById('game-frame');
+      var overlay = document.getElementById('game-overlay');
+      var loading = document.getElementById('game-loading');
+      var controls = document.getElementById('game-controls');
+      var tip     = document.getElementById('game-tip');
+
+      clearInterval(loadTimerInterval);
+      frame.src = '';
+      frame.style.display = 'none';
+      loading.style.display = 'none';
+      controls.style.display = 'none';
+      overlay.style.display = '';
+      tip.innerHTML = '▶ Click <strong style="color:#7dc829">Play Now</strong> above to start · WASD or Arrow Keys to move · R to retry';
+      updateFsButton(false);
+    }
+
+    /* ── Fullscreen ── */
+    var isIosFakeFS = false;
+
+    function toggleFullscreen() {
+      var wrapper = document.querySelector('.game-wrapper');
+
+      if (isIosFakeFS) {
+        // Exit iOS fake fullscreen
+        wrapper.style.cssText = wrapper.style.cssText
+          .replace(/position\s*:\s*fixed\s*;?/gi, '')
+          .replace(/inset\s*:\s*0\s*;?/gi, '')
+          .replace(/z-index\s*:\s*99999\s*;?/gi, '')
+          .replace(/border-radius\s*:\s*0\s*;?/gi, '');
+        document.body.style.overflow = '';
+        isIosFakeFS = false;
+        updateFsButton(false);
+        return;
+      }
+
+      if (document.fullscreenElement || document.webkitFullscreenElement) {
+        (document.exitFullscreen || document.webkitExitFullscreen).call(document);
+        return;
+      }
+
+      var reqFn = wrapper.requestFullscreen
+               || wrapper.webkitRequestFullscreen
+               || wrapper.mozRequestFullScreen;
+
+      if (reqFn) {
+        reqFn.call(wrapper);
+      } else {
+        // iOS Safari fallback: fake fullscreen with position:fixed
+        wrapper.style.cssText += ';position:fixed;inset:0;z-index:99999;border-radius:0;width:100%;height:100%;padding-bottom:0;';
+        document.body.style.overflow = 'hidden';
+        isIosFakeFS = true;
+        updateFsButton(true);
+      }
+    }
+
+    function updateFsButton(isFS) {
+      var label  = document.getElementById('fs-label');
+      var icon   = document.getElementById('fs-icon');
+      if (!label) return;
+      if (isFS) {
+        label.textContent = 'Exit';
+        icon.innerHTML = '<path d="M8 3v3a2 2 0 0 1-2 2H3"/><path d="M21 8h-3a2 2 0 0 1-2-2V3"/><path d="M3 16h3a2 2 0 0 1 2 2v3"/><path d="M16 21v-3a2 2 0 0 1 2-2h3"/>';
+      } else {
+        label.textContent = 'Fullscreen';
+        icon.innerHTML = '<path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/>';
+      }
+    }
+
+    // Native fullscreen change events
+    document.addEventListener('fullscreenchange', function() {
+      updateFsButton(!!document.fullscreenElement);
+    });
+    document.addEventListener('webkitfullscreenchange', function() {
+      updateFsButton(!!document.webkitFullscreenElement);
+    });
 
     function toggleMenu() {
       document.getElementById('mobile-menu').classList.toggle('hidden');
